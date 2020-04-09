@@ -123,6 +123,8 @@ class TeamsController extends Controller
             return abort(401);
         }
         $teams = Team::all();
+        // print_r($teams[0]->members[0]->user->name);
+        // edit();
 
         return view('admin.team_members.index', compact('teams'));
     }

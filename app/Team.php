@@ -17,6 +17,6 @@ class Team extends Model
 
     public function members()
     {
-        return $this->belongsToMany(::class, 'permission_role');
+        return $this->hasMany('App\TeamMembers', 'team_id');
     }
 }

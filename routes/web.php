@@ -29,7 +29,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
+    Route::post('user_hide', ['uses' => 'Admin\UsersController@hide', 'as' => 'user_hide']);
+    Route::post('user_active', ['uses' => 'Admin\UsersController@active', 'as' => 'user_active']);
     Route::resource('teams', 'Admin\TeamsController');
     Route::get('team_members', ['uses' => 'Admin\TeamsController@teamMembers', 'as' => 'team_members']);
     Route::post('teams_mass_destroy', ['uses' => 'Admin\TeamsController@massDestroy', 'as' => 'teams.mass_destroy']);
+    Route::get('team_members_edit', ['uses' => 'Admin\TeamsController@teamMembersEdit', 'as' => 'team_members_edit']);
 });

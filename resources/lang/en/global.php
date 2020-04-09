@@ -57,7 +57,7 @@ return [
 	'team-members' => [
 		'title' => 'Team Members',
 		'team_name' => 'Team Name',
-		'team_member' => 'Team Member',
+		'team_members' => 'Team Members',
 		'created_at' => 'Time',
 	],
 	'app_create' => 'Create',
@@ -74,5 +74,7 @@ return [
 	'app_back_to_list' => 'Back to list',
 	'app_dashboard' => 'Dashboard',
 	'app_delete' => 'Delete',
+	'app_hide' => 'Hide',
+	'app_active' => 'Active',
 	'global_title' => 'Quick LMS',
 ];
