@@ -8,8 +8,6 @@ use App\TeamMembers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\Admin\StoreUsersRequest;
-use App\Http\Requests\Admin\UpdateUsersRequest;
 
 class TeamsController extends Controller
 {
@@ -38,8 +36,9 @@ class TeamsController extends Controller
         if (! Gate::allows('team_create')) {
             return abort(401);
         }
+        $users = User::where('is_active', 1)->pluck('name', 'id');
 
-        return view('admin.teams.create');
+        return view('admin.teams.create', compact('users'));
     }
 
     /**
@@ -80,8 +79,9 @@ class TeamsController extends Controller
             return abort(401);
         }
         $team = Team::findOrFail($id);
+        $users = User::where('is_active', 1)->pluck('name', 'id');
 
-        return view('admin.teams.edit', compact('team'));
+        return view('admin.teams.edit', compact('team', 'users'));
     }
 
     /**

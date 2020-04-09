@@ -10,8 +10,6 @@
     </p>
     @endcan
 
-    
-
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
@@ -21,18 +19,19 @@
             <table class="table table-bordered table-striped {{ count($users) > 0 ? 'datatable' : '' }}">
                 <thead>
                     <tr>
+                        <th>@lang('global.app_number')</th>
                         <th>@lang('global.users.fields.name')</th>
                         <th>@lang('global.users.fields.email')</th>
                         <th>@lang('global.users.fields.role')</th>
                         <th>&nbsp;</th>
-
                     </tr>
                 </thead>
                 
                 <tbody>
                     @if (count($users) > 0)
-                        @foreach ($users as $user)
+                        @foreach ($users as $key => $user)
                             <tr data-entry-id="{{ $user->id }}" class="{{ $user->is_active ? '' : 'disabled' }}">
+                                <td>{{ count($users) - $key }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>

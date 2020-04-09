@@ -15,11 +15,8 @@
                     {!! Form::label('team_name', 'Team Name*', ['class' => 'control-label']) !!}
                     {!! Form::text('team_name', old('team_name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('team_name'))
-                        <p class="help-block">
-                            {{ $errors->first('team_name') }}
-                        </p>
-                    @endif
+                    {!! Form::label('team_leader', 'Team Leader*', ['class' => 'control-label']) !!}
+                    {!! Form::select('team_leader', $users, old('team_leader'), ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>

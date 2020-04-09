@@ -50,6 +50,7 @@ return [
 		'created_at' => 'Time',
 		'fields' => [
 			'team_name' => 'Team Name',
+			'team_leader' => 'Team Leader',
 			'created_at' => 'Created Time',
 		],
 	],
@@ -61,6 +62,21 @@ return [
 		'team_members' => 'Team Members',
 		'created_at' => 'Time',
 	],
+
+	'payment_histories' => [
+		'title' => 'Payment History',
+		'fields' => [
+			'amount' => 'Amount',
+			'real_amount' => 'Real Amount',
+			'name' => 'Name',
+			'payment_address' => 'Payment Address',
+			'comment' => 'Comment',
+			'date' => 'Date',
+			'state' => 'State',
+			'actions' => 'Actions',
+		],
+	],
+
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',
@@ -78,4 +94,9 @@ return [
 	'app_hide' => 'Hide',
 	'app_active' => 'Active',
 	'global_title' => 'Quick LMS',
+	'app_confirm' => 'Confirm',
+	'app_confirmed' => 'Confirmed',
+	'app_action' => 'Actions',
+	'p_confirmed_state' => 1,
+	'app_number' => 'No.',
 ];

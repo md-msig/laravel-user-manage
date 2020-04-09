@@ -13,10 +13,14 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     protected $table = 'teams';
-    protected $fillable = ['team_name'];
+    protected $fillable = ['team_name', 'team_leader'];
 
     public function members()
     {
         return $this->hasMany('App\TeamMembers', 'team_id');
+    }
+    public function leader()
+    {
+        return $this->belongsTo('App\User', 'team_leader');
     }
 }

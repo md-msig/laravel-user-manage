@@ -3,14 +3,12 @@
 
 @section('content')
     <h3 class="page-title">@lang('global.teams.title')</h3>
-    @can('user_create')
+    @can('team_create')
     <p>
         <a href="{{ route('admin.teams.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
     </p>
     @endcan
-
-    
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -18,14 +16,12 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($teams) > 0 ? 'datatable' : '' }} @can('team_delete') dt-select @endcan">
+            <table class="table table-bordered table-striped {{ count($teams) > 0 ? 'datatable' : '' }}">
                 <thead>
                     <tr>
-                        @can('team_access')
-                            <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
-                        @endcan
-
+                        <th>@lang('global.app_number')</th>
                         <th>@lang('global.teams.fields.team_name')</th>
+                        <th>@lang('global.teams.fields.team_leader')</th>
                         <th>@lang('global.teams.fields.created_at')</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -33,13 +29,11 @@
                 
                 <tbody>
                     @if (count($teams) > 0)
-                        @foreach ($teams as $team)
+                        @foreach ($teams as $key => $team)
                             <tr data-entry-id="{{ $team->id }}">
-                                @can('team_access')
-                                    <td></td>
-                                @endcan
-
+                                <td>{{ count($teams) - $key }}</td>
                                 <td>{{ $team->team_name }}</td>
+                                <td>{{ $team->leader['name'] }}</td>
                                 <td>{{ $team->created_at }}</td>
                                 <td>
                                     @can('team_edit')
@@ -70,10 +64,4 @@
 @stop
 
 @section('javascript') 
-    <script>
-        @can('team_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.teams.mass_destroy') }}';
-        @endcan
-
-    </script>
 @endsection

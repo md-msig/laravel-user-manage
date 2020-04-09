@@ -10,35 +10,27 @@
     </p>
     @endcan
 
-    
-
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($permissions) > 0 ? 'datatable' : '' }} @can('permission_delete') dt-select @endcan">
+            <table class="table table-bordered table-striped {{ count($permissions) > 0 ? 'datatable' : '' }}">
                 <thead>
                     <tr>
-                        @can('permission_delete')
-                            <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
-                        @endcan
-
+                        <th>@lang('global.app_number')</th>
                         <th>@lang('global.permissions.fields.title')</th>
-                                                <th>&nbsp;</th>
+                        <th>&nbsp;</th>
 
                     </tr>
                 </thead>
                 
                 <tbody>
                     @if (count($permissions) > 0)
-                        @foreach ($permissions as $permission)
+                        @foreach ($permissions as $key => $permission)
                             <tr data-entry-id="{{ $permission->id }}">
-                                @can('permission_delete')
-                                    <td></td>
-                                @endcan
-
+                                <td>{{ count($permissions) - $key }}</td>
                                 <td>{{ $permission->title }}</td>
                                                                 <td>
                                     @can('permission_view')

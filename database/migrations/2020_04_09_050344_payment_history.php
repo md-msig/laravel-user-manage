@@ -18,10 +18,12 @@ class PaymentHistory extends Migration
                 $table->increments('id');
                 $table->integer('amount');
                 $table->double('real_amount');
+                $table->integer('user_id')->unsigned()->nullable();
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->string('user_name');
                 $table->string('payment_address');
                 $table->string('comment');
-                $table->tinyInteger('action');
+                $table->string('state');
                 $table->timestamps();
             });
         }

@@ -13,6 +13,7 @@
             <table class="table table-bordered table-striped {{ count($teams) > 0 ? 'datatable' : '' }}">
                 <thead>
                     <tr>
+                        <th>@lang('global.app_number')</th>
                         <th>@lang('global.teams.fields.team_name')</th>
                         <th>@lang('global.team-members.title')</th>
                         <th>&nbsp;</th>
@@ -21,8 +22,9 @@
                 
                 <tbody>
                     @if (count($teams) > 0)
-                        @foreach ($teams as $team)
+                        @foreach ($teams as $key => $team)
                             <tr data-entry-id="{{ $team->id }}">
+                                <td>{{ count($teams) - $key }}</td>
                                 <td>{{ $team->team_name }}</td>
                                 <td>
                                     @foreach ($team->members as $member)

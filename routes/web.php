@@ -36,4 +36,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::post('teams_mass_destroy', ['uses' => 'Admin\TeamsController@massDestroy', 'as' => 'teams.mass_destroy']);
     Route::get('team_members_edit', ['uses' => 'Admin\TeamsController@teamMembersEdit', 'as' => 'team_members_edit']);
     Route::post('team_members_update', ['uses' => 'Admin\TeamsController@teamMembersUpdate', 'as' => 'team_members_update']);
+    Route::resource('payment_history', 'Admin\PaymentHistoryController');
+    Route::get('payment_history_confirm', ['uses' => 'Admin\PaymentHistoryController@confirm', 'as' => 'payment_history.confirm']);
+    Route::post('payment_history_confirm', ['uses' => 'Admin\PaymentHistoryController@confirmPost', 'as' => 'payment_history.confirm']);
 });

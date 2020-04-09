@@ -60,7 +60,7 @@
             @can('team_management_access')
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-users"></i>
+                    <i class="fa fa-share-alt"></i>
                     <span class="title">@lang('global.team-management.title')</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -89,6 +89,14 @@
                     </li>
                 @endcan
                 </ul>
+            </li>
+            @endcan
+            @can('payment_access')
+            <li class="">
+                <a href="{{ route('admin.payment_history.index') }}">
+                    <i class="fa fa-credit-card"></i>
+                    <span class="title">Payment History</span>
+                </a>
             </li>
             @endcan
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
