@@ -35,4 +35,5 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::get('team_members', ['uses' => 'Admin\TeamsController@teamMembers', 'as' => 'team_members']);
     Route::post('teams_mass_destroy', ['uses' => 'Admin\TeamsController@massDestroy', 'as' => 'teams.mass_destroy']);
     Route::get('team_members_edit', ['uses' => 'Admin\TeamsController@teamMembersEdit', 'as' => 'team_members_edit']);
+    Route::post('team_members_update', ['uses' => 'Admin\TeamsController@teamMembersUpdate', 'as' => 'team_members_update']);
 });

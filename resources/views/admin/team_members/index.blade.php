@@ -31,7 +31,7 @@
                                 </td>
                                 <td>
                                     @can('team_access')
-                                    <a href="{{ route('admin.team_members_edit',[$team->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('admin.team_members_edit',['team_id' => $team->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                 </td>
 

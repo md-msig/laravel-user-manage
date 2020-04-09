@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Team;
+use App\User;
+use App\TeamMembers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -127,6 +129,47 @@ class TeamsController extends Controller
         // edit();
 
         return view('admin.team_members.index', compact('teams'));
+    }
+
+    public function isSelected($id, $member_ids){
+        $is_selected = 0;
+        for($j = 0; $j < count($member_ids); $j++) {
+            if($id == $member_ids[$j]){
+                $is_selected = 1;
+            }
+        }
+        return $is_selected;
+    }
+
+    public function teamMembersEdit(Request $request)
+    {
+        if (! Gate::allows('team_access')) {
+            return abort(401);
+        }
+
+        $team_id = $request->input("team_id");
+
+        $member_ids = TeamMembers::select('user_id')->where("team_id",$team_id)->pluck('user_id');
+        $users = User::where("is_active", 1)->get();
+        for($i = 0; $i < count($users); $i++){
+            $users[$i]->is_selected = $this->isSelected($users[$i]->id, $member_ids);
+        }
+        
+        return view('admin.team_members.edit', compact('team_id', 'users'));
+    }
+
+    public function teamMembersUpdate(Request $request) {
+        if (! Gate::allows('team_access')) {
+            return abort(401);
+        }
+        $member_ids = $request->input("member_id");
+        $team_id = $request->input("team_id");
+        TeamMembers::where("team_id", $team_id)->delete();
+
+        foreach ($member_ids as $id) {
+            TeamMembers::create(['team_id' => $team_id, "user_id" => $id]);
+        }
+        return redirect()->route('admin.team_members');
     }
 
     /**

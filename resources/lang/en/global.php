@@ -56,6 +56,7 @@ return [
 
 	'team-members' => [
 		'title' => 'Team Members',
+		'edit' => 'Edit Team Members',
 		'team_name' => 'Team Name',
 		'team_members' => 'Team Members',
 		'created_at' => 'Time',
