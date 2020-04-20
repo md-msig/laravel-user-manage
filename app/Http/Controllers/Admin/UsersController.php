@@ -97,8 +97,6 @@ class UsersController extends Controller
         $user->update($request->all());
         $user->role()->sync(array_filter((array)$request->input('role')));
 
-
-
         return redirect()->route('admin.users.index');
     }
 
@@ -138,6 +136,50 @@ class UsersController extends Controller
         }
         $user = User::findOrFail($id);
         $user->delete();
+
+        return redirect()->route('admin.users.index');
+    }
+
+    /**
+     * Update User in storage.
+     *
+     * @param  \App\Http\Requests\UpdateUsersRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function hide(Request $request)
+    {
+        $id = $request->input('user_id');
+        if (! Gate::allows('user_hide')) {
+            return abort(401);
+        }
+        $user = User::findOrFail($id);
+        if($user) {
+            $user->is_active = 0;
+            $user->save();
+        }
+
+        return redirect()->route('admin.users.index');
+    }
+
+    /**
+     * Update User in storage.
+     *
+     * @param  \App\Http\Requests\UpdateUsersRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function active(Request $request)
+    {
+        $id = $request->input('user_id');
+        if (! Gate::allows('user_hide')) {
+            return abort(401);
+        }
+        $user = User::findOrFail($id);
+        if($user) {
+            $user->is_active = 1;
+            $user->save();
+        }
 
         return redirect()->route('admin.users.index');
     }

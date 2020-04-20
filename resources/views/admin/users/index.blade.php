@@ -10,37 +10,28 @@
     </p>
     @endcan
 
-    
-
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($users) > 0 ? 'datatable' : '' }} @can('user_delete') dt-select @endcan">
+            <table class="table table-bordered table-striped {{ count($users) > 0 ? 'datatable' : '' }}">
                 <thead>
                     <tr>
-                        @can('user_delete')
-                            <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
-                        @endcan
-
+                        <th>@lang('global.app_number')</th>
                         <th>@lang('global.users.fields.name')</th>
                         <th>@lang('global.users.fields.email')</th>
                         <th>@lang('global.users.fields.role')</th>
-                                                <th>&nbsp;</th>
-
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 
                 <tbody>
                     @if (count($users) > 0)
-                        @foreach ($users as $user)
-                            <tr data-entry-id="{{ $user->id }}">
-                                @can('user_delete')
-                                    <td></td>
-                                @endcan
-
+                        @foreach ($users as $key => $user)
+                            <tr data-entry-id="{{ $user->id }}" class="{{ $user->is_active ? '' : 'disabled' }}">
+                                <td>{{ count($users) - $key }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
@@ -49,20 +40,29 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    @can('user_view')
-                                    <a href="{{ route('admin.users.show',[$user->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
-                                    @endcan
                                     @can('user_edit')
                                     <a href="{{ route('admin.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
-                                    @can('user_delete')
-                                    {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.users.destroy', $user->id])) !!}
-                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
+                                    @can('user_hide')
+                                    @if($user->is_active)
+                                        {!! Form::open(array(
+                                            'style' => 'display: inline-block;',
+                                            'method' => 'POST',
+                                            'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                            'route' => ['admin.user_hide'])) !!}
+                                        {!! Form::hidden('user_id', $user->id) !!}
+                                        {!! Form::submit(trans('global.app_hide'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                        {!! Form::close() !!}
+                                    @else
+                                        {!! Form::open(array(
+                                            'style' => 'display: inline-block;',
+                                            'method' => 'POST',
+                                            'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                            'route' => ['admin.user_active'])) !!}
+                                        {!! Form::hidden('user_id', $user->id) !!}
+                                        {!! Form::submit(trans('global.app_active'), array('class' => 'btn btn-xs btn-success')) !!}
+                                        {!! Form::close() !!}
+                                    @endif
                                     @endcan
                                 </td>
 
@@ -80,10 +80,4 @@
 @stop
 
 @section('javascript') 
-    <script>
-        @can('user_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.users.mass_destroy') }}';
-        @endcan
-
-    </script>
 @endsection

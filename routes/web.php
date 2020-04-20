@@ -1,5 +1,5 @@
 <?php
-Route::get('/', 'HomeController@index');
+Route::get('/', 'Admin\DashboardController@index');
 
 
 // Authentication Routes...
@@ -21,7 +21,7 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
 
-Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => '', 'as' => 'admin.'], function () {
     Route::get('/home', 'Admin\DashboardController@index');
     Route::resource('permissions', 'Admin\PermissionsController');
     Route::post('permissions_mass_destroy', ['uses' => 'Admin\PermissionsController@massDestroy', 'as' => 'permissions.mass_destroy']);
@@ -29,5 +29,15 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
-
+    Route::post('user_hide', ['uses' => 'Admin\UsersController@hide', 'as' => 'user_hide']);
+    Route::post('user_active', ['uses' => 'Admin\UsersController@active', 'as' => 'user_active']);
+    Route::resource('teams', 'Admin\TeamsController');
+    Route::get('team_members', ['uses' => 'Admin\TeamsController@teamMembers', 'as' => 'team_members']);
+    Route::post('teams_mass_destroy', ['uses' => 'Admin\TeamsController@massDestroy', 'as' => 'teams.mass_destroy']);
+    Route::get('team_members_edit', ['uses' => 'Admin\TeamsController@teamMembersEdit', 'as' => 'team_members_edit']);
+    Route::post('team_members_update', ['uses' => 'Admin\TeamsController@teamMembersUpdate', 'as' => 'team_members_update']);
+    Route::resource('payment_history', 'Admin\PaymentHistoryController');
+    Route::get('payment_history_confirm', ['uses' => 'Admin\PaymentHistoryController@confirm', 'as' => 'payment_history.confirm']);
+    Route::post('payment_history_confirm', ['uses' => 'Admin\PaymentHistoryController@confirmPost', 'as' => 'payment_history.confirm']);
+	Route::resource('user_payment', 'Admin\UserPaymentController');
 });

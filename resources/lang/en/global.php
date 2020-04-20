@@ -1,15 +1,86 @@
 <?php
 
 return [
-		'user-management' => [		'title' => 'User Management',		'created_at' => 'Time',		'fields' => [		],	],
-		'permissions' => [		'title' => 'Permissions',		'created_at' => 'Time',		'fields' => [			'title' => 'Title',		],	],
-		'roles' => [		'title' => 'Roles',		'created_at' => 'Time',		'fields' => [			'title' => 'Title',			'permission' => 'Permissions',		],	],
-		'users' => [		'title' => 'Users',		'created_at' => 'Time',		'fields' => [			'name' => 'Name',			'email' => 'Email',			'password' => 'Password',			'role' => 'Role',			'remember-token' => 'Remember token',		],	],
-		'courses' => [		'title' => 'Courses',		'created_at' => 'Time',		'fields' => [			'teachers' => 'Teachers',			'title' => 'Title',			'slug' => 'Slug',			'description' => 'Description',			'price' => 'Price',			'course-image' => 'Course image',			'start-date' => 'Start date',			'published' => 'Published',		],	],
-		'lessons' => [		'title' => 'Lessons',		'created_at' => 'Time',		'fields' => [			'course' => 'Course',			'title' => 'Title',			'slug' => 'Slug',			'lesson-image' => 'Lesson image',			'short-text' => 'Short text',			'full-text' => 'Full text',			'position' => 'Position',			'downloadable-files' => 'Downloadable files',			'free-lesson' => 'Free lesson',			'published' => 'Published',		],	],
-		'questions' => [		'title' => 'Questions',		'created_at' => 'Time',		'fields' => [			'question' => 'Question',			'question-image' => 'Question image',			'score' => 'Score',		],	],
-		'questions-options' => [		'title' => 'Questions options',		'created_at' => 'Time',		'fields' => [			'question' => 'Question',			'option-text' => 'Option text',			'correct' => 'Correct',		],	],
-		'tests' => [		'title' => 'Tests',		'created_at' => 'Time',		'fields' => [			'course' => 'Course',			'lesson' => 'Lesson',			'title' => 'Title',			'description' => 'Description',			'questions' => 'Questions',			'published' => 'Published',		],	],
+	
+	'user-management' => [
+		'title' => 'User Management',
+		'created_at' => 'Time',
+		'fields' => [
+		],
+	],
+	
+	'permissions' => [
+		'title' => 'Permissions',
+		'created_at' => 'Time',
+		'fields' => [
+			'title' => 'Title',
+		],
+	],
+	
+	'roles' => [
+		'title' => 'Roles',
+		'created_at' => 'Time',
+		'fields' => [
+			'title' => 'Title',
+			'permission' => 'Permissions',
+		],
+	],
+	
+	'users' => [
+		'title' => 'Users',
+		'created_at' => 'Time',
+		'fields' => [
+			'name' => 'Name',
+			'email' => 'Email',
+			'password' => 'Password',
+			'role' => 'Role',
+			'remember-token' => 'Remember token',
+		],
+	],
+
+	'team-management' => [
+		'title' => 'Team Management',
+		'created_at' => 'Time',
+		'fields' => [
+		],
+	],	
+
+	'teams' => [
+		'title' => 'Teams',
+		'created_at' => 'Time',
+		'fields' => [
+			'team_name' => 'Team Name',
+			'team_leader' => 'Team Leader',
+			'created_at' => 'Created Time',
+		],
+	],
+
+	'team-members' => [
+		'title' => 'Team Members',
+		'edit' => 'Edit Team Members',
+		'team_name' => 'Team Name',
+		'team_members' => 'Team Members',
+		'created_at' => 'Time',
+	],
+
+	'payment_histories' => [
+		'title' => 'Payment History',
+		'fields' => [
+			'amount' => 'Amount',
+			'real_amount' => 'Real Amount',
+			'name' => 'Name',
+			'payment_address' => 'Payment Address',
+			'comment' => 'Comment',
+			'date' => 'Date',
+			'state' => 'State',
+			'actions' => 'Actions',
+		],
+	],
+	
+	'total_payment' => [
+		'title' => 'Total Payment',
+	],
+
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',
@@ -24,5 +95,12 @@ return [
 	'app_back_to_list' => 'Back to list',
 	'app_dashboard' => 'Dashboard',
 	'app_delete' => 'Delete',
+	'app_hide' => 'Hide',
+	'app_active' => 'Active',
 	'global_title' => 'Quick LMS',
+	'app_confirm' => 'Confirm',
+	'app_confirmed' => 'Confirmed',
+	'app_action' => 'Actions',
+	'p_confirmed_state' => 1,
+	'app_number' => 'No.',
 ];
