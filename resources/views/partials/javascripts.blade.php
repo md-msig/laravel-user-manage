@@ -19,6 +19,8 @@
 <script src="{{ url('adminlte/js/app.min.js') }}"></script>
 <script>
     window._token = '{{ csrf_token() }}';
+	
+	
 </script>
 
 

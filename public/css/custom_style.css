@@ -1,8 +1,12 @@
 tr.disabled {
     background: #dadada !important;
 }
-tr.confirmed {
+tr.unconfirmed {
     background: #d9f5d2 !important;
+}
+.amount_desc {
+    font-size: 20px;
+    font-weight: 700;
 }
 div#DataTables_Table_0_filter {
     display: none;

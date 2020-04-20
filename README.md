@@ -16,15 +16,13 @@ Simple mini-project created for User Management. You can Create Superadmin, admi
 
 ## How to Install
 
-- git clonehttps://github.com/bestmomo/laravel5-example.gitprojectname
+- git clone https://github.com/md-msig/laravel-user-manage
 - cd projectname
 - composer install
 - php artisan key:generate
-- Create a database and inform .env
-- php artisan migrate --seed to create and      populate tables
+- Create a database in local and inform .env
+- Setup Database
 - php artisan serve to start the app on http://localhost:8000/
 
 Note:admin login email:admin@admin.com Password:password
-### License
 
-Please use and re-use however you want.
