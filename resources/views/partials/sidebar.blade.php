@@ -12,7 +12,6 @@
                 </a>
             </li>
 
-
             @can('user_management_access')
             <li class="treeview">
                 <a href="#">
@@ -96,6 +95,14 @@
                 <a href="{{ route('admin.payment_history.index') }}">
                     <i class="fa fa-credit-card"></i>
                     <span class="title">Payment History</span>
+                </a>
+            </li>
+            @endcan
+			@can('payment_access')
+            <li class="">
+                <a href="{{ route('admin.user_payment.index') }}">
+                    <i class="fa fa-credit-card"></i>
+                    <span class="title">Total Payment</span>
                 </a>
             </li>
             @endcan

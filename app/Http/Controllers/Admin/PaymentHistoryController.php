@@ -20,9 +20,9 @@ class PaymentHistoryController extends Controller
         if (! Gate::allows('payment_access')) {
             return abort(401);
         }
-        $payment_histories = PaymentHistory::all();
-        
-        return view('admin.payment_history.index', compact('payment_histories'));
+		$payment_histories = PaymentHistory::all()->SortByDesc('id');
+        $real_amount = PaymentHistory::all()->sum('real_amount');
+        return view('admin.payment_history.index', compact('payment_histories', 'real_amount'));
     }
 
     /**
@@ -35,8 +35,13 @@ class PaymentHistoryController extends Controller
         if (! Gate::allows('payment_create')) {
             return abort(401);
         }
-        $users = User::where('is_active', 1)->pluck('name', 'id');
-
+		if(Gate::check('admin'))
+			$users = User::where('is_active', 1)->pluck('name', 'id');
+		else
+			$users = User::where(['is_active' => 1, 'id' => auth()->user()->id])->pluck('name', 'id');
+			
+        
+		
         return view('admin.payment_history.create', compact('users'));
     }
 

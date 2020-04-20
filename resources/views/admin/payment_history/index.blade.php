@@ -10,12 +10,12 @@
     @endcan
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            @lang('global.app_list')
+        <div class="panel-heading amount_desc">
+            Total Amount - {{$real_amount}} USD
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($payment_histories) > 0 ? 'datatable' : '' }}">
+            <table class="table table-bordered table-striped {{ count($payment_histories) > 0 ? 'datatable' : '' }}" >
                 <thead>
                     <tr>
                         <th>@lang('global.app_number')</th>
@@ -32,7 +32,7 @@
                 <tbody>
                     @if (count($payment_histories) > 0)
                         @foreach ($payment_histories as $key => $history)
-                            <tr data-entry-id="{{ $history->id }}" class="{{ $history->state ? 'confirmed' : '' }}">
+                            <tr data-entry-id="{{ $history->id }}" class="{{ $history->state ? '' : 'unconfirmed' }}">
                                 <td>{{ $key + 1 }}</td>   
                                 <td>{{ $history->amount }}</td>
                                 <td>{{ $history->real_amount }}</td>
@@ -44,7 +44,7 @@
                                     @if(Gate::check('admin'))
                                     <a href="{{ route('admin.payment_history.edit',[$history->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @else
-                                        @if(Gate::check('payment_edit') && (auth()->user()->id == $history->created_by) && ($history->state != 1))
+                                        @if(Gate::check('payment_edit') && (auth()->user()->id == $history->created_by))
                                         <a href="{{ route('admin.payment_history.edit',[$history->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                         @endif
                                     @endif

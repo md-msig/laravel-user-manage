@@ -76,6 +76,10 @@ return [
 			'actions' => 'Actions',
 		],
 	],
+	
+	'total_payment' => [
+		'title' => 'Total Payment',
+	],
 
 	'app_create' => 'Create',
 	'app_save' => 'Save',

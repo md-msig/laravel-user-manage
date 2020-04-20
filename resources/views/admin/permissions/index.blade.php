@@ -32,15 +32,12 @@
                             <tr data-entry-id="{{ $permission->id }}">
                                 <td>{{ count($permissions) - $key }}</td>
                                 <td>{{ $permission->title }}</td>
-                                                                <td>
-                                    @can('permission_view')
-                                    <a href="{{ route('admin.permissions.show',[$permission->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
-                                    @endcan
+                                <td>
                                     @can('permission_edit')
                                     <a href="{{ route('admin.permissions.edit',[$permission->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('permission_delete')
-{!! Form::open(array(
+                                    {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
@@ -64,10 +61,4 @@
 @stop
 
 @section('javascript') 
-    <script>
-        @can('permission_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.permissions.mass_destroy') }}';
-        @endcan
-
-    </script>
 @endsection
